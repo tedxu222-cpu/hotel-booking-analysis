@@ -1,0 +1,4 @@
+﻿deposit_type,booking_count,cancellation_count,cancellation_rate,avg_adr
+No Deposit,95995,26604,0.2771,98.21
+Non Refund,14479,14388,0.9937,89.36
+Refundable,154,28,0.1818,72.23

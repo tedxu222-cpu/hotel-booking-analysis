@@ -1,0 +1,3 @@
+﻿guest_type,booking_count,cancellation_count,cancellation_rate,avg_adr,avg_special_requests
+repeated_guest,3678,537,0.146,60.93,0.6
+new_guest,106950,40483,0.3785,98.25,0.55

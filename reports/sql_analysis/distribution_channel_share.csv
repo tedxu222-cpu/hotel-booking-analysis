@@ -1,0 +1,6 @@
+﻿distribution_channel,booking_count,booking_share,cancellation_count,cancellation_rate,avg_adr
+TA/TO,90895,0.8216,37370,0.4111,99.11
+Direct,13089,0.1183,2203,0.1683,95.93
+Corporate,6450,0.0583,1410,0.2186,69.05
+GDS,189,0.0017,33,0.1746,120.08
+Undefined,5,0.0,4,0.8,46.24
