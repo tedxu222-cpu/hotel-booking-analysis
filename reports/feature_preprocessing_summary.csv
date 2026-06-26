@@ -1,0 +1,16 @@
+﻿metric,value
+input_rows,110628.0
+input_columns,86.0
+candidate_features,82.0
+train_rows,77439.0
+validation_rows,22126.0
+test_rows,11063.0
+numeric_scaled_features,61.0
+target_encoded_features,4.0
+one_hot_source_features,17.0
+one_hot_output_features,112.0
+processed_train_features_before_variance,177.0
+processed_train_features_after_variance,176.0
+random_forest_preview_train_auc,0.930672
+random_forest_preview_validation_auc,0.928397
+random_forest_preview_test_auc,0.927674

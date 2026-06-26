@@ -1,8 +1,16 @@
 hotel_booking_trends.zip
 data/raw/*.zip
+data/database/*.db
+data/database/*.db-shm
+data/database/*.db-wal
+data/processed/hotel_booking_features.parquet
+data/processed/modeling_dataset*.parquet
 
 __pycache__/
 .ipynb_checkpoints/
 .venv/
 venv/
 .env
+~$*.docx
+~$*.xlsx
+~$*.pptx

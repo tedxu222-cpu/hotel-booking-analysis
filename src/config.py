@@ -1,9 +1,9 @@
-"""Project configuration for the hotel booking analysis pipeline."""
+"""酒店预订取消预测项目的统一路径配置。"""
 
 from pathlib import Path
 
 
-# 项目根目录统一从 src/config.py 反推，避免在代码中写死本机绝对路径。
+# 项目根目录统一从 src/config.py 反推，避免在代码里写死本机绝对路径。
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 RAW_DATA_PATH = PROJECT_ROOT / "data" / "raw" / "hotel_bookings_updated_2024.csv"
@@ -16,6 +16,12 @@ CLEANED_PARQUET_PATH = (
 MODELING_BASE_PARQUET_PATH = (
     PROJECT_ROOT / "data" / "processed" / "modeling_base.parquet"
 )
+FEATURE_PARQUET_PATH = (
+    PROJECT_ROOT / "data" / "processed" / "hotel_booking_features.parquet"
+)
+SQLITE_DATABASE_PATH = PROJECT_ROOT / "data" / "database" / "hotel_booking.db"
+SQL_BASIC_ANALYSIS_PATH = PROJECT_ROOT / "sql" / "basic_analysis.sql"
+SQL_ANALYSIS_REPORT_DIR = PROJECT_ROOT / "reports" / "sql_analysis"
 
 CUSTOMER_PROFILE_TABLE_PATH = (
     PROJECT_ROOT / "data" / "intermediate" / "customer_profile_table.parquet"
@@ -32,7 +38,7 @@ BOOKING_BEHAVIOR_TABLE_PATH = (
 
 TARGET_COLUMN = "is_canceled"
 
-# 字段列表以项目说明中的数据字典为准；实际数据多出的字段会在质量检查中记录。
+# 字段列表以项目说明中的数据字典为准；实际数据中额外字段会在质量检查中记录。
 EXPECTED_COLUMNS = [
     "hotel",
     "is_canceled",
