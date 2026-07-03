@@ -1,0 +1,4 @@
+﻿dataset,total_count,not_canceled_count,canceled_count,not_canceled_ratio,canceled_ratio,data_source
+train,74132,46712,27420,0.6301,0.3699,second_stage_modeling_dataset
+validation,18628,11704,6924,0.6283,0.3717,second_stage_modeling_dataset
+test,17868,11192,6676,0.6264,0.3736,second_stage_modeling_dataset

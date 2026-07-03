@@ -1,0 +1,2 @@
+﻿best_threshold,touched_orders,touch_rate,touched_canceled_orders,estimated_saved_orders,estimated_reduced_cancel_loss,intervention_cost,estimated_net_benefit,simulation_assumption
+0.3,8839,0.4947,6235,935.25,148944.98,44195.0,104749.98,按当前模拟参数估算：干预可挽回部分真实取消订单，并扣除固定干预成本。

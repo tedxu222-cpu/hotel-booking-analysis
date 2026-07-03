@@ -12,7 +12,6 @@ import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import VarianceThreshold, mutual_info_classif
 from sklearn.metrics import roc_auc_score
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 
@@ -24,6 +23,9 @@ from config import FEATURE_PARQUET_PATH, PROJECT_ROOT, TARGET_COLUMN  # noqa: E4
 
 
 RANDOM_STATE = 42
+TRAIN_END_DATE = pd.Timestamp("2024-09-01")
+VALIDATION_END_DATE = pd.Timestamp("2024-11-01")
+TEST_END_DATE = pd.Timestamp("2025-01-01")
 plt.rcParams["font.sans-serif"] = [
     "Microsoft YaHei",
     "SimHei",
@@ -56,8 +58,11 @@ def load_feature_data(path: Path = FEATURE_PARQUET_PATH) -> pd.DataFrame:
     return pd.read_parquet(path)
 
 
-def select_candidate_features(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
+def select_candidate_features(
+    data: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.Series, pd.Series]:
     """剔除目标变量、结果字段和日期原值，得到建模候选特征。"""
+    arrival_date = pd.to_datetime(data["arrival_date"])
     drop_columns = [
         TARGET_COLUMN,
         "reservation_status",
@@ -70,28 +75,30 @@ def select_candidate_features(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.Seri
     if len(datetime_columns) > 0:
         candidate_features = candidate_features.drop(columns=datetime_columns)
     target = data[TARGET_COLUMN].astype("int8")
-    return candidate_features, target
+    return candidate_features, target, arrival_date
 
 
-def split_data(
+def split_data_by_time_window(
     features: pd.DataFrame,
     target: pd.Series,
+    arrival_date: pd.Series,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
-    """按 7/2/1 分层划分训练集、验证集和测试集。"""
-    x_train, x_temp, y_train, y_temp = train_test_split(
-        features,
-        target,
-        test_size=0.3,
-        random_state=RANDOM_STATE,
-        stratify=target,
+    """按入住日期做时间窗口划分，模拟用历史月份预测未来月份。"""
+    train_mask = arrival_date < TRAIN_END_DATE
+    validation_mask = (arrival_date >= TRAIN_END_DATE) & (
+        arrival_date < VALIDATION_END_DATE
     )
-    x_validation, x_test, y_validation, y_test = train_test_split(
-        x_temp,
-        y_temp,
-        test_size=1 / 3,
-        random_state=RANDOM_STATE,
-        stratify=y_temp,
-    )
+    test_mask = (arrival_date >= VALIDATION_END_DATE) & (arrival_date < TEST_END_DATE)
+
+    if not train_mask.any() or not validation_mask.any() or not test_mask.any():
+        raise ValueError("时间窗口划分后存在空数据集，请检查 arrival_date 覆盖范围。")
+
+    x_train = features.loc[train_mask].copy()
+    x_validation = features.loc[validation_mask].copy()
+    x_test = features.loc[test_mask].copy()
+    y_train = target.loc[train_mask].copy()
+    y_validation = target.loc[validation_mask].copy()
+    y_test = target.loc[test_mask].copy()
     return x_train, x_validation, x_test, y_train, y_validation, y_test
 
 
@@ -472,10 +479,13 @@ def save_outputs(
 def preprocess_features() -> None:
     """执行特征预处理与有效性评估主流程。"""
     data = load_feature_data()
-    candidates, target = select_candidate_features(data)
-    x_train, x_validation, x_test, y_train, y_validation, y_test = split_data(
-        candidates,
-        target,
+    candidates, target, arrival_date = select_candidate_features(data)
+    x_train, x_validation, x_test, y_train, y_validation, y_test = (
+        split_data_by_time_window(
+            candidates,
+            target,
+            arrival_date,
+        )
     )
     (
         encoded_train,
@@ -536,9 +546,24 @@ def preprocess_features() -> None:
             ("input_rows", data.shape[0]),
             ("input_columns", data.shape[1]),
             ("candidate_features", candidates.shape[1]),
+            ("split_method", "time_window_by_arrival_date"),
+            ("train_window", f"arrival_date < {TRAIN_END_DATE.date()}"),
+            (
+                "validation_window",
+                f"{TRAIN_END_DATE.date()} <= arrival_date < "
+                f"{VALIDATION_END_DATE.date()}",
+            ),
+            (
+                "test_window",
+                f"{VALIDATION_END_DATE.date()} <= arrival_date < "
+                f"{TEST_END_DATE.date()}",
+            ),
             ("train_rows", x_train.shape[0]),
             ("validation_rows", x_validation.shape[0]),
             ("test_rows", x_test.shape[0]),
+            ("train_cancel_rate", round(float(y_train.mean()), 6)),
+            ("validation_cancel_rate", round(float(y_validation.mean()), 6)),
+            ("test_cancel_rate", round(float(y_test.mean()), 6)),
             ("numeric_scaled_features", len(numeric_columns)),
             ("target_encoded_features", len(target_encoding_columns)),
             ("one_hot_source_features", len(low_cardinality_columns)),

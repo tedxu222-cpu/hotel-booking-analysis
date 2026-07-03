@@ -1,10 +1,15 @@
 hotel_booking_trends.zip
 data/raw/*.zip
+data/raw/*.csv
 data/database/*.db
 data/database/*.db-shm
 data/database/*.db-wal
+data/processed/hotel_bookings_cleaned.csv
+data/processed/hotel_bookings_cleaned.parquet
 data/processed/hotel_booking_features.parquet
+data/processed/modeling_base.parquet
 data/processed/modeling_dataset*.parquet
+data/processed/stage3_*.parquet
 
 __pycache__/
 .ipynb_checkpoints/

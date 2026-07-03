@@ -36,7 +36,7 @@
   - `data/processed/modeling_dataset_test.parquet`
   - `data/processed/modeling_dataset.parquet`
 
-说明：上述 Parquet 数据集为可由脚本复现的本地生成文件，体积较大，已按项目数据管理原则加入 `.gitignore`，不直接提交 GitHub。
+说明：建模数据集按 `arrival_date` 时间窗口划分，2024 年 1-8 月为训练集，9-10 月为验证集，11-12 月为测试集。上述 Parquet 数据集为可由脚本复现的本地生成文件，体积较大，已按项目数据管理原则加入 `.gitignore`，不直接提交 GitHub。
 
 ## 5. 特征有效性评估报告
 
@@ -46,7 +46,7 @@
 - 相关性热力图：`reports/feature_correlation_heatmap.png`
 - 特征重要性 Top 20 图：`reports/feature_importance_top20.png`
 
-评估方法包括方差阈值法、目标变量相关性分析、互信息法和随机森林特征重要性预评估。
+评估方法包括方差阈值法、目标变量相关性分析、互信息法和随机森林特征重要性预评估；编码、标准化和重要性预评估均基于时间窗口划分后的训练集拟合。
 
 ## 6. 探索性数据分析报告
 
