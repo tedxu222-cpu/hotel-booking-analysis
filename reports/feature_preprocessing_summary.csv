@@ -1,16 +1,23 @@
 ﻿metric,value
-input_rows,110628.0
-input_columns,86.0
-candidate_features,82.0
-train_rows,77439.0
-validation_rows,22126.0
-test_rows,11063.0
-numeric_scaled_features,61.0
-target_encoded_features,4.0
-one_hot_source_features,17.0
-one_hot_output_features,112.0
-processed_train_features_before_variance,177.0
-processed_train_features_after_variance,176.0
-random_forest_preview_train_auc,0.930672
-random_forest_preview_validation_auc,0.928397
-random_forest_preview_test_auc,0.927674
+input_rows,110628
+input_columns,86
+candidate_features,82
+split_method,time_window_by_arrival_date
+train_window,arrival_date < 2024-09-01
+validation_window,2024-09-01 <= arrival_date < 2024-11-01
+test_window,2024-11-01 <= arrival_date < 2025-01-01
+train_rows,74132
+validation_rows,18628
+test_rows,17868
+train_cancel_rate,0.369881
+validation_cancel_rate,0.371699
+test_cancel_rate,0.373629
+numeric_scaled_features,61
+target_encoded_features,4
+one_hot_source_features,17
+one_hot_output_features,103
+processed_train_features_before_variance,168
+processed_train_features_after_variance,167
+random_forest_preview_train_auc,0.93067
+random_forest_preview_validation_auc,0.925975
+random_forest_preview_test_auc,0.925805

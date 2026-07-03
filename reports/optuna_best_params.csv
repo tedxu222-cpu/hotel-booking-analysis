@@ -1,0 +1,26 @@
+﻿model,parameter,value
+Logistic Regression,penalty,l1
+Logistic Regression,C,1.0465133152078552
+Random Forest,n_estimators,160
+Random Forest,max_depth,23
+Random Forest,min_samples_leaf,26
+Random Forest,min_samples_split,83
+Random Forest,max_features,0.5
+XGBoost,n_estimators,750
+XGBoost,max_depth,8
+XGBoost,learning_rate,0.03289827572605774
+XGBoost,subsample,0.7748632945508364
+XGBoost,colsample_bytree,0.7014095070994715
+XGBoost,min_child_weight,6.639402717273302
+XGBoost,gamma,2.2836971999395574
+XGBoost,reg_alpha,0.0061605612837216115
+XGBoost,reg_lambda,1.8097579714908616
+LightGBM,n_estimators,750
+LightGBM,num_leaves,61
+LightGBM,max_depth,14
+LightGBM,learning_rate,0.04152084661332488
+LightGBM,subsample,0.7086483747149092
+LightGBM,colsample_bytree,0.9018504020448246
+LightGBM,min_child_samples,123
+LightGBM,reg_alpha,0.005650908569924403
+LightGBM,reg_lambda,6.989492862771031

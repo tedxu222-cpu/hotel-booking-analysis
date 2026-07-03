@@ -1,0 +1,5 @@
+﻿model,n_trials,best_validation_auc,tuning_seconds,best_params
+Logistic Regression,8,0.915197,276.91,"{'penalty': 'l1', 'C': 1.0465133152078552}"
+Random Forest,10,0.94145,776.34,"{'n_estimators': 160, 'max_depth': 23, 'min_samples_leaf': 26, 'min_samples_split': 83, 'max_features': 0.5}"
+XGBoost,30,0.947243,556.74,"{'n_estimators': 750, 'max_depth': 8, 'learning_rate': 0.03289827572605774, 'subsample': 0.7748632945508364, 'colsample_bytree': 0.7014095070994715, 'min_child_weight': 6.639402717273302, 'gamma': 2.2836971999395574, 'reg_alpha': 0.0061605612837216115, 'reg_lambda': 1.8097579714908616}"
+LightGBM,30,0.947896,326.03,"{'n_estimators': 750, 'num_leaves': 61, 'max_depth': 14, 'learning_rate': 0.04152084661332488, 'subsample': 0.7086483747149092, 'colsample_bytree': 0.9018504020448246, 'min_child_samples': 123, 'reg_alpha': 0.005650908569924403, 'reg_lambda': 6.989492862771031}"

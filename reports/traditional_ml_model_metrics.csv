@@ -1,0 +1,9 @@
+﻿model,dataset,auc,accuracy,precision,recall,f1,train_seconds
+Logistic Regression,validation,0.9151,0.8225,0.7207,0.8528,0.7812,9.23
+Logistic Regression,test,0.9152,0.8073,0.6897,0.88,0.7733,9.23
+Random Forest,validation,0.9356,0.8598,0.8042,0.8232,0.8136,18.51
+Random Forest,test,0.935,0.8603,0.8054,0.8253,0.8153,18.51
+XGBoost,validation,0.9413,0.857,0.7801,0.8569,0.8167,9.43
+XGBoost,test,0.9429,0.8597,0.7829,0.8643,0.8216,9.43
+LightGBM,validation,0.9451,0.8651,0.7967,0.8553,0.825,3.47
+LightGBM,test,0.9465,0.8678,0.8024,0.8572,0.8289,3.47

@@ -1,0 +1,7 @@
+﻿dataset,total_count,not_canceled_count,canceled_count,not_canceled_ratio,canceled_ratio,data_source,hotel_type
+city_train,51449,30044,21405,0.584,0.416,second_stage_modeling_dataset,City Hotel
+city_validation,12984,7584,5400,0.5841,0.4159,second_stage_modeling_dataset,City Hotel
+city_test,12401,7243,5158,0.5841,0.4159,second_stage_modeling_dataset,City Hotel
+resort_train,22683,16668,6015,0.7348,0.2652,second_stage_modeling_dataset,Resort Hotel
+resort_validation,5644,4120,1524,0.73,0.27,second_stage_modeling_dataset,Resort Hotel
+resort_test,5467,3949,1518,0.7223,0.2777,second_stage_modeling_dataset,Resort Hotel

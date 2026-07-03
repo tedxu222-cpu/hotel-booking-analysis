@@ -4,3 +4,8 @@ matplotlib
 seaborn
 scikit-learn
 pyarrow
+xgboost
+lightgbm
+optuna
+tensorflow
+shap

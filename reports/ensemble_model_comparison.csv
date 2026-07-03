@@ -1,0 +1,8 @@
+﻿dataset,auc,accuracy,precision,recall,f1,model,train_seconds
+test,0.9485,0.8716,0.8113,0.8552,0.8326,LightGBM,11.26
+test,0.9483,0.8721,0.8135,0.8532,0.8329,XGBoost,36.98
+test,0.948,0.8713,0.8089,0.8583,0.8328,Stacking,
+test,0.9429,0.8615,0.7904,0.8567,0.8222,Embedding MLP,51.65
+test,0.9422,0.8639,0.8074,0.8348,0.8209,Random Forest,82.59
+test,0.9341,0.8459,0.7648,0.8486,0.8045,MLP,40.8
+test,0.9152,0.8196,0.7175,0.8532,0.7795,Logistic Regression,48.24

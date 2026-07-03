@@ -19,6 +19,16 @@ MODELING_BASE_PARQUET_PATH = (
 FEATURE_PARQUET_PATH = (
     PROJECT_ROOT / "data" / "processed" / "hotel_booking_features.parquet"
 )
+MODELING_DATASET_PATH = PROJECT_ROOT / "data" / "processed" / "modeling_dataset.parquet"
+TRAIN_DATASET_PATH = (
+    PROJECT_ROOT / "data" / "processed" / "modeling_dataset_train.parquet"
+)
+VALIDATION_DATASET_PATH = (
+    PROJECT_ROOT / "data" / "processed" / "modeling_dataset_validation.parquet"
+)
+TEST_DATASET_PATH = (
+    PROJECT_ROOT / "data" / "processed" / "modeling_dataset_test.parquet"
+)
 SQLITE_DATABASE_PATH = PROJECT_ROOT / "data" / "database" / "hotel_booking.db"
 SQL_BASIC_ANALYSIS_PATH = PROJECT_ROOT / "sql" / "basic_analysis.sql"
 SQL_ANALYSIS_REPORT_DIR = PROJECT_ROOT / "reports" / "sql_analysis"
