@@ -42,7 +42,7 @@
 - 样本不平衡处理方案对比，包括原始训练集、SMOTE 过采样、欠采样和类别权重调整。
 - 逻辑回归、随机森林、XGBoost、LightGBM 四类传统机器学习模型构建与 Optuna 调优。
 - MLP 和 Embedding MLP 深度学习模型构建，包含早停和学习率衰减策略。
-- Stacking 融合模型构建，融合 XGBoost、LightGBM 与 MLP 的预测结果。
+- 模型融合方案构建，包含加权平均融合和多组 Stacking 融合方案，并对比不同融合策略的效果。
 - 模型解释：逻辑回归系数、XGBoost/LightGBM SHAP 值、Top 10 核心特征。
 - 预测错误样本分析，重点观察历史行为信息较少订单和特殊日期近似场景。
 - 业务落地模拟：风险分层、A/B 测试方案、干预阈值收益测算、动态定价建议、渠道库存分配建议和取消政策优化建议。
@@ -94,12 +94,13 @@ hotel-booking-analysis/
 
 - 建模 Notebook：`notebooks/modeling_sample_construction.ipynb`
 - 第三阶段实验报告：`reports/第三阶段实验报告.docx`
-- 传统模型结果：`reports/traditional_model_performance_comparison.csv`
+- 样本构建与划分结果：`reports/stage3_sample_split_summary.csv`、`reports/stage3_sampling_strategy_comparison.csv`、`reports/stage3_hotel_type_split_summary.csv`
+- 传统模型结果：`reports/traditional_model_performance_comparison.csv`、`reports/traditional_model_tuning_comparison.csv`
 - 深度学习结果：`reports/deep_learning_model_comparison.csv`
-- 融合模型结果：`reports/ensemble_model_metrics.csv`
+- 融合模型结果：`reports/ensemble_model_metrics.csv`、`reports/ensemble_model_comparison.csv`
 - 模型解释结果：`reports/logistic_regression_coefficients.csv`、`reports/shap_feature_importance.csv`、`reports/core_feature_top10.csv`
 - 错误样本分析：`reports/prediction_error_samples.csv`、`reports/prediction_error_scenario_summary.csv`
-- 业务模拟结果：`reports/business_threshold_simulation.csv`、`reports/business_expected_benefit_summary.csv`、`reports/business_revenue_management_recommendations.csv`
+- 业务模拟结果：`reports/business_risk_scores.csv`、`reports/business_risk_segment_summary.csv`、`reports/business_threshold_simulation.csv`
 
 ## 运行方式
 
@@ -137,6 +138,12 @@ python src/features/preprocess_feature_dataset.py
 
 ```bash
 python src/features/build_detailed_feature_dictionary.py
+```
+
+第三阶段建模、调优、融合、解释性分析和业务模拟主要在以下 Notebook 中完成：
+
+```text
+notebooks/modeling_sample_construction.ipynb
 ```
 
 ## 数据与 Git 说明

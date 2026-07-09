@@ -1,8 +1,14 @@
-﻿dataset,auc,accuracy,precision,recall,f1,model,train_seconds
-test,0.9485,0.8716,0.8113,0.8552,0.8326,LightGBM,11.26
-test,0.9483,0.8721,0.8135,0.8532,0.8329,XGBoost,36.98
-test,0.948,0.8713,0.8089,0.8583,0.8328,Stacking,
-test,0.9429,0.8615,0.7904,0.8567,0.8222,Embedding MLP,51.65
-test,0.9422,0.8639,0.8074,0.8348,0.8209,Random Forest,82.59
-test,0.9341,0.8459,0.7648,0.8486,0.8045,MLP,40.8
-test,0.9152,0.8196,0.7175,0.8532,0.7795,Logistic Regression,48.24
+﻿dataset,auc,accuracy,precision,recall,f1,model,train_seconds,model_type,description,auc_rank
+test,0.9485,0.8716,0.8113,0.8552,0.8326,LightGBM,11.26,single,,
+test,0.9485,0.872,0.8117,0.8561,0.8333,Weighted_Average_LGBM_Heavy,,weighted_average,"Higher weight for LightGBM, the strongest single model.",1.0
+test,0.9485,0.8726,0.8176,0.8481,0.8326,Stacking_C_RF_Meta,,stacking,XGBoost + LightGBM + MLP with Random Forest meta learner.,1.0
+test,0.9485,0.8735,0.8193,0.8487,0.8337,Stacking_D_LGBM_Meta,,stacking,XGBoost + LightGBM + MLP with LightGBM meta learner.,1.0
+test,0.9484,0.8721,0.813,0.8543,0.8331,Weighted_Average_Tree_Heavy,,weighted_average,"Higher weights for tree models, lower weight for MLP.",2.0
+test,0.9483,0.8721,0.8135,0.8532,0.8329,XGBoost,36.98,single,,
+test,0.948,0.8713,0.8089,0.8583,0.8328,Stacking_A_LR_XGB_LGBM_MLP,,stacking,XGBoost + LightGBM + MLP with Logistic Regression meta learner.,4.0
+test,0.9477,0.8708,0.8091,0.8562,0.832,Stacking_B_LR_RF_LGBM_MLP,,stacking,Linear model + bagging tree + boosting tree + MLP.,5.0
+test,0.9476,0.871,0.8097,0.8559,0.8322,Weighted_Average_Equal,,weighted_average,"Equal weighted average of XGBoost, LightGBM and MLP.",6.0
+test,0.9429,0.8615,0.7904,0.8567,0.8222,Embedding MLP,51.65,single,,
+test,0.9422,0.8639,0.8074,0.8348,0.8209,Random Forest,82.59,single,,
+test,0.9341,0.8459,0.7648,0.8486,0.8045,MLP,40.8,single,,
+test,0.9152,0.8196,0.7175,0.8532,0.7795,Logistic Regression,48.24,single,,
