@@ -29,6 +29,8 @@ VALIDATION_DATASET_PATH = (
 TEST_DATASET_PATH = (
     PROJECT_ROOT / "data" / "processed" / "modeling_dataset_test.parquet"
 )
+MODEL_ARTIFACT_DIR = PROJECT_ROOT / "models"
+BEST_MODEL_ARTIFACT_PATH = MODEL_ARTIFACT_DIR / "best_model.pkl"
 SQLITE_DATABASE_PATH = PROJECT_ROOT / "data" / "database" / "hotel_booking.db"
 SQL_BASIC_ANALYSIS_PATH = PROJECT_ROOT / "sql" / "basic_analysis.sql"
 SQL_ANALYSIS_REPORT_DIR = PROJECT_ROOT / "reports" / "sql_analysis"

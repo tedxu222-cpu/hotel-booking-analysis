@@ -11,6 +11,7 @@
 - 构建逻辑回归、随机森林、XGBoost、LightGBM、MLP 和 Embedding MLP 模型，比较预测效果。
 - 结合逻辑回归系数和 SHAP 值解释模型，识别影响预订取消的核心特征。
 - 基于模型预测结果设计业务风险分层、干预阈值模拟、收益管理建议和 A/B 测试方案。
+- 将建模、评估、融合、预测推理和业务模拟逻辑封装为可复用 Python 模块。
 
 ## 当前进度
 
@@ -47,6 +48,17 @@
 - 预测错误样本分析，重点观察历史行为信息较少订单和特殊日期近似场景。
 - 业务落地模拟：风险分层、A/B 测试方案、干预阈值收益测算、动态定价建议、渠道库存分配建议和取消政策优化建议。
 
+### 第四阶段：代码工程化封装
+
+已完成：
+
+- 初步封装建模数据读取、样本统计、酒店类型样本拆分等工具函数。
+- 初步封装二分类模型统一评估函数。
+- 初步封装传统机器学习模型构建、Optuna 搜索空间、模型保存和模型加载工具。
+- 初步封装加权平均融合、Stacking 融合和业务收益模拟工具。
+- 开发批量预测与单条预测接口，输出取消概率、预测标签、风险等级和建议动作。
+- 编写 Python 工具包使用说明和基础单元测试。
+
 ## 目录结构
 
 ```text
@@ -63,7 +75,11 @@ hotel-booking-analysis/
 ├── src/
 │   ├── data/                # 数据质量检查、清洗和中间表脚本
 │   ├── database/            # SQLite 建库和 SQL 分析脚本
-│   └── features/            # 特征工程、特征预处理和特征字典脚本
+│   ├── features/            # 特征工程、特征预处理和特征字典脚本
+│   ├── models/              # 模型训练、评估、融合和预测推理模块
+│   ├── business/            # 业务风险分层和收益模拟模块
+│   └── pipeline.py          # 特征工程与特征预处理统一入口
+├── tests/                   # 基础单元测试
 ├── requirements.txt
 └── README.md
 ```
@@ -102,6 +118,20 @@ hotel-booking-analysis/
 - 错误样本分析：`reports/prediction_error_samples.csv`、`reports/prediction_error_scenario_summary.csv`
 - 业务模拟结果：`reports/business_risk_scores.csv`、`reports/business_risk_segment_summary.csv`、`reports/business_threshold_simulation.csv`
 
+### 第四阶段工程化封装
+
+- Python 工具包使用说明：`docs/api_usage.md`
+- 用户手册：`docs/user_manual.md`
+- 项目总报告：`reports/项目总报告.docx`
+- 统一流程入口：`src/pipeline.py`
+- 建模数据工具：`src/models/dataset.py`
+- 模型评估工具：`src/models/evaluation.py`
+- 传统模型工具：`src/models/traditional.py`
+- 模型融合工具：`src/models/ensemble.py`
+- 预测推理接口：`src/models/predict.py`
+- 业务模拟工具：`src/business/simulation.py`
+- 基础单元测试：`tests/test_model_package.py`
+
 ## 运行方式
 
 安装依赖：
@@ -134,6 +164,12 @@ python src/features/build_feature_dataset.py
 python src/features/preprocess_feature_dataset.py
 ```
 
+也可以通过统一入口依次运行特征工程和特征预处理：
+
+```bash
+python src/pipeline.py --step feature_pipeline
+```
+
 生成详细特征字典：
 
 ```bash
@@ -144,6 +180,12 @@ python src/features/build_detailed_feature_dictionary.py
 
 ```text
 notebooks/modeling_sample_construction.ipynb
+```
+
+运行基础单元测试：
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
 ```
 
 ## 数据与 Git 说明
@@ -159,6 +201,8 @@ notebooks/modeling_sample_construction.ipynb
 - `data/processed/modeling_base.parquet`
 - `data/processed/modeling_dataset*.parquet`
 - `data/processed/stage3_*.parquet`
+- `models/*.pkl`
+- `models/*.joblib`
 - `__pycache__/`
 - Office 临时锁文件，如 `~$*.docx`
 
