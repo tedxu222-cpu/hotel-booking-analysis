@@ -10,6 +10,8 @@ data/processed/hotel_booking_features.parquet
 data/processed/modeling_base.parquet
 data/processed/modeling_dataset*.parquet
 data/processed/stage3_*.parquet
+models/*.pkl
+models/*.joblib
 
 __pycache__/
 .ipynb_checkpoints/
