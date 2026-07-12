@@ -1,5 +1,5 @@
 ﻿model,dataset,auc,accuracy,precision,recall,f1
-MLP,validation,0.94,0.8472,0.7539,0.8745,0.8097
-MLP,test,0.9341,0.8459,0.7648,0.8486,0.8045
 Embedding MLP,validation,0.9447,0.865,0.7973,0.8538,0.8246
 Embedding MLP,test,0.9429,0.8615,0.7904,0.8567,0.8222
+MLP,validation,0.94,0.8472,0.7539,0.8745,0.8097
+MLP,test,0.9341,0.8459,0.7648,0.8486,0.8045
