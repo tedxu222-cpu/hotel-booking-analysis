@@ -112,7 +112,8 @@ hotel-booking-analysis/
 - 第三阶段实验报告：`reports/第三阶段实验报告.docx`
 - 样本构建与划分结果：`reports/stage3_sample_split_summary.csv`、`reports/stage3_sampling_strategy_comparison.csv`、`reports/stage3_hotel_type_split_summary.csv`
 - 传统模型结果：`reports/traditional_model_performance_comparison.csv`、`reports/traditional_model_tuning_comparison.csv`
-- 深度学习结果：`reports/deep_learning_model_comparison.csv`
+- 深度学习结果：`reports/deep_learning_model_comparison.csv`、`reports/deep_learning_training_history.csv`
+- 深度学习训练曲线：`reports/mlp_training_curve.png`、`reports/embedding_mlp_training_curve.png`
 - 融合模型结果：`reports/ensemble_model_metrics.csv`、`reports/ensemble_model_comparison.csv`
 - 模型解释结果：`reports/logistic_regression_coefficients.csv`、`reports/shap_feature_importance.csv`、`reports/core_feature_top10.csv`
 - 错误样本分析：`reports/prediction_error_samples.csv`、`reports/prediction_error_scenario_summary.csv`
@@ -127,6 +128,7 @@ hotel-booking-analysis/
 - 建模数据工具：`src/models/dataset.py`
 - 模型评估工具：`src/models/evaluation.py`
 - 传统模型工具：`src/models/traditional.py`
+- 深度学习辅助工具：`src/models/deep_learning.py`
 - 模型融合工具：`src/models/ensemble.py`
 - 预测推理接口：`src/models/predict.py`
 - 业务模拟工具：`src/business/simulation.py`

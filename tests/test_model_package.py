@@ -7,9 +7,21 @@ import pandas as pd
 
 import src.pipeline as pipeline
 from src.models.dataset import build_split_summary, prepare_xy
+from src.models.deep_learning import build_training_history_records, replace_model_rows
 from src.models.evaluation import classification_metrics_from_probability
 from src.models.predict import assign_risk_segment, predict_batch, predict_dataframe
 from src.models.traditional import save_model_artifact
+
+
+class DummyHistory:
+    """用于测试 Keras history 转换逻辑的简化对象。"""
+
+    history = {
+        "loss": [0.5, 0.4],
+        "auc": [0.8, 0.9],
+        "val_loss": [0.45, 0.42],
+        "val_auc": [0.82, 0.88],
+    }
 
 
 class DummyProbabilityModel:
@@ -52,6 +64,44 @@ class ModelPackageTest(unittest.TestCase):
 
         self.assertEqual(metrics["auc"], 1.0)
         self.assertEqual(metrics["f1"], 1.0)
+
+    def test_build_training_history_records(self):
+        records = build_training_history_records(
+            history=DummyHistory(),
+            model_name="MLP",
+            config_id=1,
+            config={
+                "hidden_units": (128, 64),
+                "dropout_rate": 0.3,
+                "learning_rate": 0.001,
+                "batch_size": 512,
+                "epochs": 40,
+            },
+        )
+
+        self.assertEqual(len(records), 2)
+        self.assertEqual(records[0]["model"], "MLP")
+        self.assertEqual(records[1]["epoch"], 2)
+        self.assertEqual(records[1]["val_auc"], 0.88)
+
+    def test_replace_model_rows_removes_existing_model_records(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_path = Path(temp_dir) / "metrics.csv"
+            pd.DataFrame(
+                {
+                    "model": ["MLP", "LightGBM"],
+                    "auc": [0.8, 0.9],
+                }
+            ).to_csv(output_path, index=False)
+
+            result = replace_model_rows(
+                output_path=output_path,
+                new_data=pd.DataFrame({"model": ["MLP"], "auc": [0.85]}),
+                model_names=["MLP"],
+            )
+
+        self.assertEqual(result["model"].tolist(), ["LightGBM", "MLP"])
+        self.assertEqual(result["auc"].tolist(), [0.9, 0.85])
 
     def test_predict_dataframe_adds_prediction_columns(self):
         data = pd.DataFrame({"feature_a": [0.2, 0.9]})

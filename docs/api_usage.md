@@ -112,7 +112,52 @@ model.fit(X_train, y_train)
 - 复用第三阶段 Optuna 调优得到的最优参数。
 - 避免每次复现实验都重新调参。
 
-## 4. 保存模型供预测推理使用
+## 4. 深度学习模型辅助工具
+
+```python
+from src.models.deep_learning import (
+    build_mlp_model,
+    build_training_callbacks,
+    build_training_history_records,
+)
+
+model = build_mlp_model(
+    input_dim=X_train.shape[1],
+    hidden_units=(256, 128),
+    dropout_rate=0.4,
+    learning_rate=0.0005,
+)
+
+callbacks = build_training_callbacks()
+history = model.fit(
+    X_train,
+    y_train,
+    validation_data=(X_validation, y_validation),
+    callbacks=callbacks,
+)
+
+history_records = build_training_history_records(
+    history=history,
+    model_name="MLP",
+    config_id=1,
+    config={
+        "hidden_units": (256, 128),
+        "dropout_rate": 0.4,
+        "learning_rate": 0.0005,
+        "batch_size": 512,
+        "epochs": 50,
+    },
+)
+```
+
+主要用途：
+
+- 复用普通 MLP 和 Embedding MLP 的模型结构。
+- 统一 Early Stopping 和学习率衰减设置。
+- 保存逐 epoch 训练历史，便于绘制 Loss/AUC 曲线并检查过拟合。
+- 使用 `replace_model_rows()` 避免重复运行后在结果 CSV 中产生重复模型记录。
+
+## 5. 保存模型供预测推理使用
 
 ```python
 from src.config import BEST_MODEL_ARTIFACT_PATH
@@ -137,7 +182,7 @@ save_model_artifact(
 
 模型文件默认保存在 `models/` 目录，并已加入 `.gitignore`，避免把大文件提交到 GitHub。
 
-## 5. 批量预测
+## 6. 批量预测
 
 ```python
 from src.config import BEST_MODEL_ARTIFACT_PATH
@@ -157,7 +202,7 @@ prediction_result = predict_batch(
 - `risk_segment`：低风险、中风险、高风险或极高风险。
 - `suggested_action`：基于风险等级的简化业务动作建议。
 
-## 6. 单条预测
+## 7. 单条预测
 
 ```python
 from src.config import BEST_MODEL_ARTIFACT_PATH
@@ -178,7 +223,7 @@ prediction = predict_single(
 
 单条预测要求输入字段与训练模型时的特征字段一致。实际使用时，建议先通过特征工程和特征预处理脚本生成标准化后的建模字段，再调用预测接口。
 
-## 7. 模型融合
+## 8. 模型融合
 
 ```python
 from src.models.ensemble import (
@@ -206,7 +251,7 @@ weighted_prob = weighted_probability(
 - 进行加权平均融合。
 - 构建 Stacking 元学习器。
 
-## 8. 业务模拟
+## 9. 业务模拟
 
 ```python
 import numpy as np

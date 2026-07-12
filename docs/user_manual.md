@@ -190,7 +190,23 @@ src/models/traditional.py
 - `save_model_artifact()`：保存模型、特征列和元数据。
 - `load_model_artifact()`：加载已保存模型。
 
-### 6.4 模型融合工具
+### 6.4 深度学习辅助工具
+
+位置：
+
+```text
+src/models/deep_learning.py
+```
+
+主要函数：
+
+- `build_mlp_model()`：构建普通 MLP 模型。
+- `build_embedding_mlp_model()`：构建带类别 Embedding 的 MLP 模型。
+- `build_training_callbacks()`：构建 Early Stopping 和学习率衰减回调。
+- `build_training_history_records()`：将 Keras 训练历史转换为逐 epoch 记录。
+- `replace_model_rows()`：重复运行时用新结果替换旧模型结果，避免 CSV 中出现重复行。
+
+### 6.5 模型融合工具
 
 位置：
 
@@ -206,7 +222,7 @@ src/models/ensemble.py
 - `fit_stacking_model()`：训练 Stacking 元学习器。
 - `predict_stacking_probability()`：输出 Stacking 融合概率。
 
-### 6.5 预测推理接口
+### 6.6 预测推理接口
 
 位置：
 
@@ -226,7 +242,7 @@ src/models/predict.py
 - `risk_segment`：风险等级。
 - `suggested_action`：简化业务动作建议。
 
-### 6.6 业务模拟工具
+### 6.7 业务模拟工具
 
 位置：
 
