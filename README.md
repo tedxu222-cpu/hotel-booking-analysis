@@ -2,6 +2,8 @@
 
 本项目围绕酒店预订订单数据，分析订单取消行为规律，并构建用于预测酒店预订是否取消的机器学习模型。项目当前已完成数据清洗、SQLite 数据库与 SQL 分析、特征工程、探索性数据分析、特征预处理、多模型建模、模型解释和业务落地模拟。
 
+项目代码仓库：[tedxu222-cpu/hotel-booking-analysis](https://github.com/tedxu222-cpu/hotel-booking-analysis)。本项目现位于 `项目1/hotel-booking-analysis/`；文档和代码中的路径均以该项目根目录为基准，因此目录归位不会影响运行方式。
+
 ## 项目目标
 
 - 对原始酒店预订数据进行质量检查、缺失值处理、异常值处理、去重和时间字段统一。
@@ -194,17 +196,10 @@ python -m unittest discover -s tests -p "test_*.py"
 
 原始数据、SQLite 数据库、清洗后数据和建模数据体积较大，且可以通过脚本在本地复现，因此不直接提交到 GitHub。当前 `.gitignore` 已忽略：
 
-- `data/raw/*.csv`
-- `data/raw/*.zip`
-- `data/database/*.db`
-- `data/processed/hotel_bookings_cleaned.csv`
-- `data/processed/hotel_bookings_cleaned.parquet`
-- `data/processed/hotel_booking_features.parquet`
-- `data/processed/modeling_base.parquet`
-- `data/processed/modeling_dataset*.parquet`
-- `data/processed/stage3_*.parquet`
-- `models/*.pkl`
-- `models/*.joblib`
+- `data/raw/`：原始数据
+- `data/processed/`、`data/intermediate/`：处理过程产生的数据集
+- `data/database/`：SQLite 数据库及其日志文件
+- `models/`：本地训练生成的模型文件
 - `__pycache__/`
 - Office 临时锁文件，如 `~$*.docx`
 
